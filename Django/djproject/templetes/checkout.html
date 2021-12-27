@@ -1,0 +1,556 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+
+<head>
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="{%  static 'newlogo.png' %}">
+    <!-- Author Meta -->
+    <meta name="author" content="CodePixar">
+    <!-- Meta Description -->
+    <meta name="description" content="">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="">
+    <!-- meta character set -->
+    <meta charset="UTF-8">
+    <!-- Site Title -->
+    <title>SHOP EASY</title>
+
+    <!--
+            CSS
+            ============================================= -->
+    <link rel="stylesheet" href="{%  static 'css/linearicons.css' %}">
+    <link rel="stylesheet" href="{%  static 'css/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{%  static 'css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{%  static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{%  static 'css/nice-select.css' %}">
+    <link rel="stylesheet" href="{%  static 'css/nouislider.min.css' %}">
+    <link rel="stylesheet" href="{%  static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{%  static 'css/main.css' %}">
+
+    <script>
+
+		function showHideShipInfo(){
+			if(document.getElementById('f-option3').checked){
+				document.getElementById('shippingdetails').style.display='block' ;
+			} else {
+				document.getElementById('shippingdetails').style.display='none' ;
+				}
+		}
+
+	</script>
+
+</head>
+
+<body>
+
+    <!-- Start Header Area -->
+	<header class="header_area sticky-header">
+		<div class="main_menu">
+			<nav class="navbar navbar-expand-lg navbar-light main_box">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<a class="navbar-brand logo_h" onClick="return false;" href="{%  static 'index.html' %}"><img src="../static/newlogo.png" alt=""></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+						<ul class="nav navbar-nav menu_nav ml-auto">
+							<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+							<li class="nav-item submenu dropdown active">
+								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+								 aria-expanded="false">Shop</a>
+								<ul class="dropdown-menu">
+									<li class="nav-item active"><a class="nav-link" href="checkout">Product Checkout</a></li>
+									<li class="nav-item"><a class="nav-link" href="cart">Shopping Cart</a></li>
+								</ul>
+							</li>
+							<li class="nav-item"><a class="nav-link" href="login">{{status}}</a></li>
+							<li class="nav-item"><a class="nav-link" href="contact">Contact</a></li>
+                            {% if history %}
+							<li class="nav-item"><a class="nav-link" href="history">History</a></li>
+							{% endif %}
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>
+							<li class="nav-item">
+								<button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<div class="search_input" id="search_input_box">
+			<div class="container">
+				<form class="d-flex justify-content-between">
+					<input type="text" class="form-control" id="search_input" placeholder="Search Here">
+					<button type="submit" class="btn"></button>
+					<span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
+				</form>
+			</div>
+		</div>
+	</header>
+	<!-- End Header Area -->
+
+    <!-- Start Banner Area -->
+    <section class="banner-area organic-breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                <div class="col-first">
+                    <h1>Checkout</h1>
+                    <nav class="d-flex align-items-center">
+                        <a href="/">Home<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="checkout">Checkout</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Banner Area -->
+
+    <!--================Checkout Area =================-->
+    <section class="checkout_area section_gap">
+        <div class="container">
+            {% if not bool  %}
+            <div class="returning_customer" style="display: {{none}};">
+                <div class="check_title">
+                    <h2>If you have shopped with us before, please enter your details in the boxes below. If you are a new
+                    customer, please proceed to the Billing & Shipping section.</h2>
+                    <p style="color:red;">{{message}}</p>
+                </div>
+                <form class="row contact_form" action="checkout" method="post" novalidate="novalidate">{% csrf_token %}
+                    <div class="col-md-6 form-group p_star">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Username or Email">
+
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <button type="submit" value="submit" class="primary-btn">login</button>
+                        <div class="creat_account">
+                            <input type="checkbox" id="f-option" name="selector">
+                            <label for="f-option">Remember me</label>
+                        </div>
+
+                        <a class="lost_pass" href="#" onClick="return false;">Lost your password?</a><br>
+                    </div>
+                </form>
+            </div>
+            {% endif %}
+            <div class="cupon_area" style="display: none;">
+                <div class="check_title">
+                    <h2>Have a coupon? <a href="#">Click here to enter your code</a></h2>
+                </div>
+                <input type="text" placeholder="Enter coupon code">
+                <a class="tp_btn" href="#">Apply Coupon</a>
+            </div>
+            <div class="billing_details">
+
+                <div class="row">
+
+                    <div class="col-lg-8">
+                        <h3>Billing Details</h3>
+                        <p style="color:red;">save before proceeding to confirmation<br>{{validation}}</p>
+
+
+                        <form class="row contact_form" action="checkout" method="post" novalidate="novalidate">{% csrf_token %}
+
+                            {% if bool  %}
+                                {% if boolifnewaccount  %}
+                                <div class="col-md-6 form-group p_star" style="display:none;" >
+                                    <input type="text" class="form-control" id="newusername1" name="newusername" placeholder={{profile.user_id.user_name}}>
+
+                                </div>
+                                <div class="col-md-6 form-group p_star" style="display:none;"  >
+                                    <input type="password" class="form-control" id="newpassword1" name="newpassword" placeholder={{profile.user_id.password}}>
+                                </div>
+                                <div class="col-md-6 form-group p_star" style="display: {{none}};">
+                                    <input readonly style="color:red" type="text" class="form-control" id="first1" name="fname" placeholder={{profile.user_id.first_name}}>
+                                </div>
+                                <div class="col-md-6 form-group p_star" style="display: {{none}};">
+                                    <input readonly style="color:black" type="text" class="form-control" id="last1" name="lname" placeholder={{profile.user_id.last_name}}>
+                                </div>
+                                <div class="col-md-12 form-group p_star" style="display: {{none}};">
+                                    <input readonly style="color:black" type="text" class="form-control" id="company1" name="company" placeholder={{profile.user_id.company_name}}>
+                                </div>
+                                <div class="col-md-6 form-group p_star" style="display: {{none}};">
+                                    <input readonly type="text" class="form-control" id="number1" name="number" placeholder={{profile.user_id.phone_number}}>
+                                </div>
+                                <div class="col-md-6 form-group p_star" style="display: {{none}};">
+                                    <input readonly type="text" class="form-control" id="email1" name="compemailany" placeholder={{profile.user_id.email}}>
+                                </div>
+                                {% endif %}
+                            <div class="col-md-12 form-group p_star">
+                                <input readonly type="text" class="form-control" id="country11" name="country" placeholder={{profile.billing_address.country}}>
+
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                <input readonly type="text" class="form-control" id="add11" name="add1" placeholder={{profile.billing_address.address_line1}}>
+                                <!-- span class="placeholder" data-placeholder="Address line 01"></span>-->
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                <input readonly type="text" class="form-control" id="add22" name="add2" placeholder={{profile.billing_address.address_line2}}>
+
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                <input readonly type="text" class="form-control" id="city1" name="city" placeholder={{profile.billing_address.city}}>
+
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                <input readonly type="text" class="form-control" id="district1" name="district" placeholder={{profile.billing_address.district}}>
+
+
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input readonly type="text" class="form-control" id="zip1" name="zip" placeholder={{profile.billing_address.post_code}}>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <div class="creat_account">
+                                    <input style="display: none;" type="checkbox" id="f-option21" name="selector">
+                                    <label style="display: none;" for="f-option2">Create an account?</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <!--div class="creat_account">
+
+                                    <input type="checkbox" id="f-option3" name="selector" value="yes" onclick="showHideShipInfo()">
+                                    <label for="f-option3">Ship to a different address?</label><br><br>
+
+                                </div>
+                                <fieldset style="display: none" id="shippingdetails1"  >-->
+                                    <h3>Shipping Details</h3>
+                                    <div class="col-md-12 form-group p_star">
+                                        <input readonly type="text" class="form-control" id="country1" name="country" placeholder={{profile.shipping_address.country}}>
+
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <input readonly type="text" class="form-control" id="shipadd11" name="shipadd1" placeholder={{profile.shipping_address.address_line1}}>
+
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <input readonly type="text" class="form-control" id="shipadd21" name="shipadd2" placeholder={{profile.shipping_address.address_line2}}>
+
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <input readonly type="text" class="form-control" id="shipcity1" name="shipcity" placeholder={{profile.shipping_address.city}}>
+
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <input readonly type="text" class="form-control" id="shipdistrict1" name="shipdistrict" placeholder={{profile.shipping_address.district}}>
+
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <input readonly type="text" class="form-control" id="shipzip1" name="shipzip" placeholder={{profile.shipping_address.post_code}}>
+                                </div>
+                            </fieldset>
+                                <!--textarea class="form-control" name="message" id="message1" rows="1" placeholder="Order Notes"></textarea>-->
+                                <!--input type="submit" class = primary-btn style="border:transparent;line-height: 38px;border-radius: 2px;align:center;color: white;" value="Save">-->
+
+                            </div>
+
+                            {% else %}
+                            <div class="col-md-6 form-group p_star" style="display: {{none}};">
+                                <input type="text" class="form-control" id="newusername" name="newusername" placeholder="Username or Email">
+
+                            </div>
+                            <div class="col-md-6 form-group p_star" style="display: {{none}};">
+                                <input type="password" class="form-control" id="newpassword" name="newpassword" placeholder="Password">
+                            </div>
+                            <div class="col-md-6 form-group p_star" style="display: {{none}};">
+                                <input type="text" class="form-control" id="first" name="fname" placeholder="First name">
+                            </div>
+                            <div class="col-md-6 form-group p_star" style="display: {{none}};">
+                                <input type="text" class="form-control" id="last" name="lname" placeholder="Last name">
+                            </div>
+                            <div class="col-md-12 form-group p_star" style="display: {{none}};">
+                                <input type="text" class="form-control" id="company" name="company" placeholder="Company name">
+                            </div>
+                            <div class="col-md-6 form-group p_star" style="display: {{none}};">
+                                <input type="text" class="form-control" id="number" name="number" placeholder="Phone number">
+                            </div>
+                            <div class="col-md-6 form-group p_star" style="display: {{none}};">
+                                <input type="text" class="form-control" id="email" name="compemailany" placeholder="Email Address">
+                            </div>
+
+                            <div class="col-md-12 form-group p_star">
+
+                                <select class="country_select" id="country" name="country">
+                                        <option value="Pakistan">Pakistan</option>
+                                        <option value= "Bangladesh" >Bangladesh</option>
+                                        <option value="India">India</option>
+                                        <option value="China">China</option>
+                                        <option value="Dubai">Dubai</option>
+                                    </select>
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                <input type="text" class="form-control" id="add1" name="add1" placeholder="Address line 01">
+                                <!-- span class="placeholder" data-placeholder="Address line 01"></span>-->
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                <input type="text" class="form-control" id="add2" name="add2" placeholder="Address line 02">
+
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                <input type="text" class="form-control" id="city" name="city" placeholder="Town/City">
+
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                <input type="text" class="form-control" id="district" name="district" placeholder="District">
+
+
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" id="zip" name="zip" placeholder="Postcode/ZIP">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <div class="creat_account">
+                                    <input style="display: none;" type="checkbox" id="f-option2" name="selector">
+                                    <label style="display: none;" for="f-option2">Create an account?</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <div class="creat_account">
+
+                                    <input type="checkbox" id="f-option3" name="selector" value="yes" onclick="showHideShipInfo()">
+                                    <label for="f-option3">Ship to a different address?</label><br><br>
+
+                                </div>
+                                <fieldset style="display: none" id="shippingdetails"  >
+                                    <h3>Shipping Details</h3>
+                                    <div class="col-md-12 form-group p_star">
+                                    <select class="country_select" id="shipcountry" name="shipcountry">
+                                        <option value="Pakistan">Pakistan</option>
+                                        <option value="Bangladesh">Bangladesh</option>
+                                        <option value="India">India</option>
+                                        <option value="China">China</option>
+                                        <option value="Dubai">Dubai</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="text" class="form-control" id="shipadd1" name="shipadd1" placeholder="Address line 01">
+
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="text" class="form-control" id="shipadd2" name="shipadd2" placeholder="Address line 02">
+
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="text" class="form-control" id="shipcity" name="shipcity" placeholder="Town/City">
+
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="text" class="form-control" id="shipdistrict" name="shipdistrict" placeholder="District">
+
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <input type="text" class="form-control" id="shipzip" name="shipzip" placeholder="Postcode/ZIP">
+                                </div>
+                            </fieldset>
+                                <textarea class="form-control" name="message" id="message" rows="1" placeholder="Order Notes"></textarea>
+                                <input type="submit" class = primary-btn style="border:transparent;line-height: 38px;border-radius: 2px;align:center;color: white;" value="Save">
+
+                            </div>
+                            {% endif %}
+                        </form>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="order_box">
+                            <h2>Your Order</h2>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" >Product</th>
+                                        <th scope="col" style="text-align: center;">Quantity</th>
+                                        <th scope="col" style="text-align: center;">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for id,cart_product in cart_product_dict.items %}
+                                <tr>
+                                    <td width="60%" >{{cart_product.name}}</td>
+                                    <td width="20%" style="text-align: center;">{{cart_product.quantity}}</td>
+                                    <td width="20%" style="text-align: center;">{% widthratio cart_product.sales_price 1 cart_product.quantity  %}</td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+
+                            </table>
+
+                            <ul class="list list_2">
+                                <li><a href="#">Subtotal <span>RS {{sub_total}}</span></a></li>
+                                <li><a href="#">Shipping <span>Flat rate: RS {{flat_rate}}</span></a></li>
+                                <li><a href="#">Total <span>{{ sub_total|add:flat_rate }}</span></a></li>
+                                <li><a href="#">Accepted Cards<span></span></a></li>
+
+                            </ul>
+                            <div class="col-50">
+
+            <!--label for="fname"  style="color:black;">Accepted Cards</label>-->
+            <div class="icon-container">
+              <i class="fa fa-cc-visa" style="color:navy;"></i>
+              <i class="fa fa-cc-amex" style="color:blue;"></i>
+              <i class="fa fa-cc-mastercard" style="color:red;"></i>
+              <i class="fa fa-cc-discover" style="color:orange;"></i>
+            </div><br>
+
+            <input type="text" size="38" style="margin-bottom:5px;" id="cname" name="cardname" placeholder="Name on Card"><br>
+
+            <input type="text" size="38" style="margin-bottom:5px;" id="ccnum" name="cardnumber" placeholder="Credit card number">
+
+            <!--input type="text" size="38" style="margin-bottom:5px;" id="expmonth" name="expmonth" placeholder="Expiry Month">-->
+                <input list="months" size="38" style="margin-bottom:5px; name = "months"  placeholder="Expiry Month">
+                          <datalist id="months">
+                            <option value="January">
+                            <option value="February">
+                            <option value="March">
+                            <option value="April">
+                            <option value="May">
+                            <option value="June">
+                              <option value="July">
+                              <option value="August">
+                              <option value="September">
+                              <option value="October">
+                              <option value="November">
+                              <option value="December">
+
+                          </datalist>
+                <!--input type="text" size="38" style="margin-bottom:5px;" id="expyear" name="expyear" placeholder="Expiry Year">-->
+                <input list="years" size="38" style="margin-bottom:5px; name="years" placeholder="Expiry Year">
+                            <datalist id="years">
+                            <option value="2020">
+                            <option value="2021">
+                            <option value="2022">
+                            <option value="2023">
+                            <option value="2024">
+                            <option value="2025">
+                          </datalist>
+                <input type="text" id="cvv" style="margin-bottom:5px;" size="38"  name="cvv" placeholder="CVV"><br><br>
+                  <a class="primary-btn" href="confirmation">Proceed to Confirmation</a>
+
+
+          </div>
+
+
+  </div>
+</div>
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!--================End Checkout Area =================-->
+
+ 	<!-- start footer Area -->
+	<footer class="footer-area section_gap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3  col-md-6 col-sm-6">
+					<div class="single-footer-widget">
+						<h6>About Us</h6>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore
+							magna aliqua.
+						</p>
+					</div>
+				</div>
+				<div class="col-lg-4  col-md-6 col-sm-6">
+					<div class="single-footer-widget">
+						<h6>Newsletter</h6>
+						<p>Stay update with our latest</p>
+						<div class="" id="mc_embed_signup">
+
+							<form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+							 method="get" class="form-inline">
+
+								<div class="d-flex flex-row">
+
+									<input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '"
+									 required="" type="email">
+
+
+									<button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
+									<div style="position: absolute; left: -5000px;">
+										<input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+									</div>
+
+									<!-- <div class="col-lg-4 col-md-4">
+													<button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>
+												</div>  -->
+								</div>
+								<div class="info"></div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3  col-md-6 col-sm-6">
+					<div class="single-footer-widget mail-chimp">
+						<h6 class="mb-20">Instragram Feed</h6>
+						<ul class="instafeed d-flex flex-wrap">
+							<li><img src="../static/img/i1.jpg" alt=""></li>
+							<li><img src="../static/img/i2.jpg" alt=""></li>
+							<li><img src="../static/img/i3.jpg" alt=""></li>
+							<li><img src="../static/img/i4.jpg" alt=""></li>
+							<li><img src="../static/img/i5.jpg" alt=""></li>
+							<li><img src="../static/img/i6.jpg" alt=""></li>
+							<li><img src="../static/img/i7.jpg" alt=""></li>
+							<li><img src="../static/img/i8.jpg" alt=""></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-6 col-sm-6">
+					<div class="single-footer-widget">
+						<h6>Follow Us</h6>
+						<p>Let us be social</p>
+						<div class="footer-social d-flex align-items-center">
+							<a href="#" onClick="return false;"><i class="fa fa-facebook"></i></a>
+							<a href="#" onClick="return false;"><i class="fa fa-twitter"></i></a>
+							<a href="#" onClick="return false;"><i class="fa fa-dribbble"></i></a>
+							<a href="#" onClick="return false;"><i class="fa fa-behance"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
+				<p class="footer-text m-0"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+</p>
+			</div>
+		</div>
+	</footer>
+	<!-- End footer Area -->
+
+
+    <script src="../static/js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
+    <script src="../static/js/vendor/bootstrap.min.js"></script>
+    <script src="../static/js/jquery.ajaxchimp.min.js"></script>
+    <script src="../static/js/jquery.nice-select.min.js"></script>
+    <script src="../static/js/jquery.sticky.js"></script>
+    <script src="../static/js/nouislider.min.js"></script>
+    <script src="../static/js/jquery.magnific-popup.min.js"></script>
+    <script src="../static/js/owl.carousel.min.js"></script>
+    <!--gmaps Js-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+    <script src="../static/js/gmaps.min.js"></script>
+    <script src="../static/js/main.js"></script>
+</body>
+
+</html>
